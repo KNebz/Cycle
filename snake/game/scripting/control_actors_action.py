@@ -47,3 +47,6 @@ class ControlActorsAction(Action):
         
         snake = cast.get_first_actor("snakes")
         snake.turn_head(self._direction)
+
+        #DIEGO- duplicate the above if statements and update the key 'l','j','i','k'
+        # call snake #2 after if statements
