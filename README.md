@@ -38,4 +38,4 @@ root                    (project root folder)
 
 ## Authors
 ---
-* TODO: Add your name and email here
+Kelly Nebeker (bnknebeker@gmail.com)
