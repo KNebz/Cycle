@@ -26,26 +26,33 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
-            self._handle_food_collision(cast)
+            #self._handle_food_collision(cast)
+            self._handle_grow_tail(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
 
-    def _handle_food_collision(self, cast):
-        """Updates the score nd moves the food if the snake collides with the food.
-        
-        Args:
-            cast (Cast): The cast of Actors in the game.
-        """
-        score = cast.get_first_actor("scores")
-        food = cast.get_first_actor("foods")
+    def _handle_grow_tail(self,cast):
         snake = cast.get_first_actor("snakes")
-        head = snake.get_head()
+        snake2 = cast.get_first_actor("snakes2")
+        snake.grow_tail(1)
+        snake2.grow_tail(1)
 
-        if head.get_position().equals(food.get_position()):
-            points = food.get_points()
-            snake.grow_tail(points)
-            score.add_points(points)
-            food.reset()
+    # def _handle_food_collision(self, cast):
+    #     """Updates the score nd moves the food if the snake collides with the food.
+        
+    #     Args:
+    #         cast (Cast): The cast of Actors in the game.
+    #     """
+    #     score = cast.get_first_actor("scores")
+    #     food = cast.get_first_actor("foods")
+    #     snake = cast.get_first_actor("snakes")
+    #     head = snake.get_head()
+
+    #     if head.get_position().equals(food.get_position()):
+    #         points = food.get_points()
+    #         snake.grow_tail(points)
+    #         score.add_points(points)
+    #         food.reset()
     
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.
