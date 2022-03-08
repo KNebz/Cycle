@@ -30,6 +30,10 @@ class HandleCollisionsAction(Action):
             self._handle_grow_tail(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
+            
+        self.add_actions(script)
+        self.get_actions(script)
+
 
     def _handle_grow_tail(self,cast):
         snake = cast.get_first_actor("snakes")
