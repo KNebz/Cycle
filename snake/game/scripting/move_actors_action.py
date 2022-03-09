@@ -20,4 +20,4 @@ class MoveActorsAction(Action):
         for actor in actors:
             actor.move_next()
         
-        self.add_actions(script)
+        #self.add_action(script)

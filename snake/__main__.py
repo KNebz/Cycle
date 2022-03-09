@@ -23,7 +23,8 @@ def main():
     #cast.add_actor("foods", Food())
     cast.add_actor("snakes", Snake(1, constants.BLUE)) 
     cast.add_actor("snakes2", Snake(2, constants.GREEN))#Do two instances of cast.add_actor("snakes", Snake(1, constants.BLUE)) and cast.add_actor("snakes", Snake(2, constants.GREEN))
-    cast.add_actor("scores", Score())
+    cast.add_actor("scores", Score(Point(0,0)))
+    cast.add_actor("scores2", Score(Point(800, 0)))
     
     # start the game
     keyboard_service = KeyboardService()

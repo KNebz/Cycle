@@ -30,8 +30,8 @@ class HandleCollisionsAction(Action):
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
             
-        self.add_actions(script)
-        self.get_actions(script)
+        #self.add_actions(script)
+        #self.get_actions(script)
 
 
     # def _handle_food_collision(self, cast):
@@ -58,12 +58,24 @@ class HandleCollisionsAction(Action):
             cast (Cast): The cast of Actors in the game.
         """
         snake = cast.get_first_actor("snakes")
+        snake2 = cast.get_first_actor("snakes2")
         head = snake.get_segments()[0]
+        head2 = snake2.get_segments()[0]
         segments = snake.get_segments()[1:]
+        segments2 = snake2.get_segments()[1:]
+        score = cast.get_first_actor("scores")
+        score2 = cast.get_first_actor("scores2")
         
         for segment in segments:
             if head.get_position().equals(segment.get_position()):
                 self._is_game_over = True
+            if head2.get_position().equals(segment.get_position()):
+                score2.add_points()               
+        for segment2 in segments2:   
+            if head2.get_position().equals(segment2.get_position()):
+                self._is_game_over = True 
+            if head.get_position().equals(segment2.get_position()):
+                score.add_points()                 
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
@@ -73,8 +85,9 @@ class HandleCollisionsAction(Action):
         """
         if self._is_game_over:
             snake = cast.get_first_actor("snakes")
+            snake2 = cast.get_first_actor("snakes2")
             segments = snake.get_segments()
-            food = cast.get_first_actor("foods")
+            segments2 = snake2.get_segments()
 
             x = int(constants.MAX_X / 2)
             y = int(constants.MAX_Y / 2)
@@ -87,4 +100,5 @@ class HandleCollisionsAction(Action):
 
             for segment in segments:
                 segment.set_color(constants.WHITE)
-            food.set_color(constants.WHITE)
+            for segment2 in segments2:
+                segment2.set_color(constants.WHITE)    
