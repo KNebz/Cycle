@@ -39,3 +39,4 @@ root                    (project root folder)
 ## Authors
 ---
 * TODO: Add your name and email here
+*  Armando Martinez (mar21095@byui.edu)
