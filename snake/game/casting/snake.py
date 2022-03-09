@@ -12,9 +12,10 @@ class Snake(Actor):
     Attributes:
         _points (int): The number of points the food is worth.
     """
-    def __init__(self, num):    #I changed the constructor, if you need to call Snake(1), and Snake(2)
+    def __init__(self, num, color):    #I changed the constructor, if you need to call Snake(1), and Snake(2)
         super().__init__()
         self._segments = []
+        self._snake_color = color  #added to change snake color
         if num == 1:
             self._prepare_body(50, 50)  #gives diferent initial positions snake(1)
         else:
@@ -27,12 +28,14 @@ class Snake(Actor):
         # move all segments
         for segment in self._segments:
             segment.move_next()
+           
         # update velocities
         for i in range(len(self._segments) - 1, 0, -1):
             trailing = self._segments[i]
             previous = self._segments[i - 1]
             velocity = previous.get_velocity()
             trailing.set_velocity(velocity)
+        self.grow_tail(1) #grows tail by one segment on each move
 
     def get_head(self):
         return self._segments[0]
@@ -48,7 +51,7 @@ class Snake(Actor):
             segment.set_position(position)
             segment.set_velocity(velocity)
             segment.set_text("#")
-            segment.set_color(constants.GREEN)
+            segment.set_color(self._snake_color)
             self._segments.append(segment)
 
     def turn_head(self, velocity):
@@ -62,7 +65,7 @@ class Snake(Actor):
             position = Point(x - i * constants.CELL_SIZE, y)
             velocity = Point(1 * constants.CELL_SIZE, 0)
             text = "8" if i == 0 else "#"
-            color = constants.YELLOW if i == 0 else constants.GREEN
+            color = constants.YELLOW if i == 0 else self._snake_color
             
             segment = Actor()
             segment.set_position(position)
