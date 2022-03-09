@@ -28,7 +28,7 @@ class VideoService:
         if self._debug == True:
             self._draw_grid()
     
-    def draw_actor(self, actor, centered=False):
+    def draw_actor(self, actor, centered = False):
         """Draws the given actor's text on the screen.
 
         Args:

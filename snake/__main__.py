@@ -24,6 +24,7 @@ def main():
     cast.add_actor("snakes", Snake(1, constants.BLUE)) 
     cast.add_actor("snakes2", Snake(2, constants.GREEN))#Do two instances of cast.add_actor("snakes", Snake(1, constants.BLUE)) and cast.add_actor("snakes", Snake(2, constants.GREEN))
     cast.add_actor("scores", Score())
+    
     # start the game
     keyboard_service = KeyboardService()
     video_service = VideoService()
