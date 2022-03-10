@@ -27,30 +27,10 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
-            #self._handle_food_collision(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
             
-        #self.add_actions(script)
-        #self.get_actions(script)
 
-
-    # def _handle_food_collision(self, cast):
-    #     """Updates the score nd moves the food if the snake collides with the food.
-        
-    #     Args:
-    #         cast (Cast): The cast of Actors in the game.
-    #     """
-    #     score = cast.get_first_actor("scores")
-    #     food = cast.get_first_actor("foods")
-    #     snake = cast.get_first_actor("snakes")
-    #     head = snake.get_head()
-
-    #     if head.get_position().equals(food.get_position()):
-    #         points = food.get_points()
-    #         snake.grow_tail(points)
-    #         score.add_points(points)
-    #         food.reset()
     
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.
@@ -70,14 +50,22 @@ class HandleCollisionsAction(Action):
         for segment in segments:
             if head2.get_position().equals(segment.get_position()):
                 score.add_points()
-                self._winner = 1
-                self._is_game_over = True
+
+
                 
         for segment2 in segments2:   
             if head.get_position().equals(segment2.get_position()):
                 score2.add_points()
-                self._winner = 2
-                self._is_game_over = True             
+ 
+  
+        if score.total_points() == 10:
+            self._is_game_over = True
+            self._winner = 1    
+        if score2.total_points() == 10:
+            self._is_game_over = True
+            self._winner = 2  
+
+
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
