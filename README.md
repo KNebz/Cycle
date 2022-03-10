@@ -44,4 +44,4 @@ Kelly Nebeker (bnknebeker@gmail.com)
 Heidi Munson (mun21014@byui.edu)
 Armando Martinez (mar21095@byui.edu)
 Daniel McNary (blackanddan@byui.edu)
-
+Diego Gomez (gom21026@byui.edu)
