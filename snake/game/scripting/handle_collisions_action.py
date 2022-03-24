@@ -18,6 +18,7 @@ class HandleCollisionsAction(Action):
         """Constructs a new HandleCollisionsAction."""
         self._is_game_over = False
         self._winner = 0
+        self._timer = 0
 
     def execute(self, cast, script):
         """Executes the handle collisions action.
@@ -27,10 +28,17 @@ class HandleCollisionsAction(Action):
             script (Script): The script of Actions in the game.
         """
         if not self._is_game_over:
+            self._handle_tail_growing(cast)
             self._handle_segment_collision(cast)
             self._handle_game_over(cast)
             
-
+    def _handle_tail_growing(self, cast):
+        self._timer += 1
+        if self._timer % 5 == 0:
+            snake = cast.get_first_actor("snakes")
+            snake2 = cast.get_first_actor("snakes2")
+            snake.grow_tail(1)
+            snake2.grow_tail(1)
     
     def _handle_segment_collision(self, cast):
         """Sets the game over flag if the snake collides with one of its segments.
@@ -50,22 +58,14 @@ class HandleCollisionsAction(Action):
         for segment in segments:
             if head2.get_position().equals(segment.get_position()):
                 score.add_points()
-
-
+                self._winner = 1
+                self._is_game_over = True
                 
         for segment2 in segments2:   
             if head.get_position().equals(segment2.get_position()):
                 score2.add_points()
- 
-  
-        if score.total_points() == 10:
-            self._is_game_over = True
-            self._winner = 1    
-        if score2.total_points() == 10:
-            self._is_game_over = True
-            self._winner = 2  
-
-
+                self._winner = 2
+                self._is_game_over = True             
         
     def _handle_game_over(self, cast):
         """Shows the 'game over' message and turns the snake and food white if the game is over.
